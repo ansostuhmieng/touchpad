@@ -29,8 +29,7 @@ $(function()
 			$('#focus').hide();
 			beginEdit = true;
 
-			$('#decrease').show();
-			$('#increase').show();
+			showHints();
 		}
 		//console.log(y);
 	});
@@ -60,9 +59,25 @@ function showBlanket()
 	$('#dataScan').show();
 	$('#focus').show();
 	positionUI();
-	$('#decrease').hide();
-	$('#increase').hide();
+	hideHints();
 	beginEdit = false;
+}
+
+function hideHints()
+{
+	$('#decreaseLarge').hide();
+	$('#increaseLarge').hide();
+	$('#decreaseSmall').hide();
+	$('#increaseSmall').hide();
+}
+
+function showHints()
+{
+	$('#decreaseLarge').show();
+	$('#increaseLarge').show();
+	$('#decreaseSmall').show();
+	$('#increaseSmall').show();
+	positionUI();
 }
 
 function hideBlanket()
@@ -103,12 +118,27 @@ function inCenter(x,y) {
 function positionUI()
 {
 	var center = screenCenter();
-	var yOffset = $('#increase').outerHeight() /2;
+	var yOffset = $('#increaseLarge').outerHeight() /2;
 	var xOffset = $(window).width() / 4;
 
-	$('#increase').css("top", center.y - yOffset + 'px');
-	$('#increase').css("left", center.x + xOffset + 'px');
+	$('#increaseLarge').css("top", center.y - yOffset + 'px');
+	$('#increaseLarge').css("left", center.x + xOffset + 'px');
+	
+	yOffset = $('#decreaseLarge').outerHeight() /2;
+	var width = $('#decreaseLarge').outerHeight() /4;
+	$('#decreaseLarge').css("top",center.y - yOffset + 'px');
+	$('#decreaseLarge').css("left", center.x - xOffset  - width+ 'px');
 
-	$('#decrease').css("top",center.y - yOffset + 'px');
-	$('#decrease').css("left", center.x - xOffset + 'px');
+	yOffset = $(window).width() / 4;
+	xOffset = $('#increaseSmall').outerWidth() / 2;
+
+	$('#increaseSmall').css("top", center.y - yOffset + 'px');
+	$('#increaseSmall').css("left", center.x - xOffset + 'px');
+
+	xOffset = $('#decreaseSmall').outerWidth() / 2;
+	var height = $('#decreaseSmall').outerHeight();
+	$('#decreaseSmall').css("top", center.y + yOffset - height + 'px');
+	$('#decreaseSmall').css("left", center.x - xOffset + 'px');
+
+
 }
