@@ -7,10 +7,9 @@ jQuery.fn.center = function () {
     return this;
 }
 
-var startX = 0;
-var startY = 0;
 var beginEdit = false;
 var steps = 20;
+var value = [];
 
 $(function()
 {
@@ -44,6 +43,8 @@ $(function()
 
 		$('#blanket .title').text(title);
 		$('#blanket .value').text($(this).children(':first').text());
+		value = $('#blanket .value').text().substring(1).split('.');
+
 		//console.log($(this).children(':first').text());
 		showBlanket();
 	});
