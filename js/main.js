@@ -15,6 +15,7 @@ var steps = 20;
 $(function()
 {
 	$('#focus').center();
+	
 
 	$('#blanket').mousemove(function(event)
 	{
@@ -27,6 +28,9 @@ $(function()
 			startY = y;
 			$('#focus').hide();
 			beginEdit = true;
+
+			$('#decrease').show();
+			$('#increase').show();
 		}
 		//console.log(y);
 	});
@@ -38,7 +42,6 @@ $(function()
 					    .remove()   //remove all the children
 					    .end()  //again go back to selected element
 					    .text();
-
 
 		$('#blanket .title').text(title);
 		$('#blanket .value').text($(this).children(':first').text());
@@ -56,6 +59,9 @@ function showBlanket()
 {
 	$('#dataScan').show();
 	$('#focus').show();
+	positionUI();
+	$('#decrease').hide();
+	$('#increase').hide();
 	beginEdit = false;
 }
 
@@ -83,13 +89,26 @@ function inCenter(x,y) {
 	if(x < center.x + 25 && x > center.x-25)
 	{
 		inX =true;
-		console.log('in center x');
+		//console.log('in center x');
 	}
 	
 	if(y < center.y + 25 && y > center.y - 25){
 		inY= true;
-		console.log('in center y');
+		//console.log('in center y');
 	}
 
 	return inX && inY;
+}
+
+function positionUI()
+{
+	var center = screenCenter();
+	var yOffset = $('#increase').outerHeight() /2;
+	var xOffset = $(window).width() / 4;
+
+	$('#increase').css("top", center.y - yOffset + 'px');
+	$('#increase').css("left", center.x + xOffset + 'px');
+
+	$('#decrease').css("top",center.y - yOffset + 'px');
+	$('#decrease').css("left", center.x - xOffset + 'px');
 }

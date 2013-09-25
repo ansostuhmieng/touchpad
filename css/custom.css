@@ -78,3 +78,19 @@ ul li .money
     50% {opacity: 1.0;}
     100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }
+
+#decrease
+{
+	color: #FFFFFF;
+	font-size: 5em;
+	position: fixed;
+	z-index:40;
+}
+
+#increase
+{
+	color: #FFFFFF;
+	font-size: 5em;
+	position: fixed;
+	z-index:40;	
+}
