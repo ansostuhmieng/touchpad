@@ -86,7 +86,7 @@ function hideBlanket()
 	$('#dataScan').hide();
 }
 
-function screenCenter() {
+function scrollCenter() {
 	var y = Math.max(0, ($(window).height() / 2) + $(window).scrollTop());
 	var x = Math.max(0, ($(window).width()  / 2) + $(window).scrollLeft());
 
@@ -96,8 +96,18 @@ function screenCenter() {
 	return cord;
 }
 
+function windowCenter(){
+	var y = Math.max(0, ($(window).height() / 2));
+	var x = Math.max(0, ($(window).width()  / 2));
+
+	var cord = {};
+	cord.x = x;
+	cord.y = y;
+	return cord;	
+}
+
 function inCenter(x,y) {
-	var center = screenCenter();
+	var center = scrollCenter();
 	var yScroll = $(window).scrollTop();
 	var inX = false;
 	var inY = false;
@@ -105,12 +115,10 @@ function inCenter(x,y) {
 	if(x < center.x + 25 && x > center.x-25)
 	{
 		inX =true;
-		//console.log('in center x');
 	}
 	
 	if(y < center.y + 25 && y > center.y - 25){
 		inY= true;
-		//console.log('in center y');
 	}
 
 	return inX && inY;
@@ -118,7 +126,7 @@ function inCenter(x,y) {
 
 function positionUI()
 {
-	var center = screenCenter();
+	var center = windowCenter();
 	var yOffset = $('#increaseLarge').outerHeight() /2;
 	var xOffset = $(window).width() / 4;
 
@@ -140,6 +148,4 @@ function positionUI()
 	var height = $('#decreaseSmall').outerHeight();
 	$('#decreaseSmall').css("top", center.y + yOffset - height + 'px');
 	$('#decreaseSmall').css("left", center.x - xOffset + 'px');
-
-
 }
