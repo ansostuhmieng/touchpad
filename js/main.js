@@ -21,7 +21,7 @@ $(function()
 		var x = event.pageX;
 		var y = event.pageY;
 
-		if(inCenter(x,y))
+		if(inCenter(x,y) && !beginEdit)
 		{
 			startX = x;
 			startY = y;
@@ -29,6 +29,18 @@ $(function()
 			beginEdit = true;
 
 			showHints();
+		}
+
+		if(beginEdit && !inCenter(x,y))
+		{
+			var cord = {};
+			cord.x = x;
+			cord.y = y;
+			//updateValue(cord);
+			beginEdit = false
+			console.log('bar');
+			var interval = window.setInterval(logTimer,2000);
+			console.log(interval);
 		}
 		//console.log(y);
 	});
@@ -148,4 +160,22 @@ function positionUI()
 	var height = $('#decreaseSmall').outerHeight();
 	$('#decreaseSmall').css("top", center.y + yOffset - height + 'px');
 	$('#decreaseSmall').css("left", center.x - xOffset + 'px');
+}
+
+var scale = 5;
+
+function logTimer()
+{
+	console.log('now');
+}
+
+function updateValue(cord)
+{
+	if(inCenter(cord.x, cord.y))
+		return;
+
+	console.log('foo');
+	value[0] = parseInt(value[0]) + 1;
+	$('#blanket .value').text('$' + value[0] + '.' + value[1]);
+
 }
